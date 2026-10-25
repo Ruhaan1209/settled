@@ -221,7 +221,7 @@ code {
   align-items: flex-start;
   justify-content: flex-end;
   gap: 10px;
-  min-height: 150px;
+  min-height: 130px;
   padding: 22px;
   border: none;
   border-radius: var(--radius);
@@ -434,4 +434,58 @@ code {
     opacity: 1;
     transform: none;
   }
+}
+
+/* Room codes */
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.code-input {
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-align: center;
+}
+
+.code-input::placeholder {
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.code-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 18px 16px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.room-code {
+  margin: 0;
+  font-size: 2.6rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  font-variant-numeric: tabular-nums;
+  user-select: all;
+}
+
+.code-hint {
+  font-size: 0.85rem;
 }

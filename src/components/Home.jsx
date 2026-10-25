@@ -9,6 +9,14 @@ export default function Home() {
   const [name, setName] = useState(getSavedName)
   const [busy, setBusy] = useState(null)
   const [error, setError] = useState('')
+  const [code, setCode] = useState('')
+
+  function handleJoin(e) {
+    e.preventDefault()
+    if (code.length < 6) return
+    if (name.trim()) saveName(name.trim())
+    navigate(`/r/${code}`)
+  }
 
   async function handleCreate(category) {
     const trimmed = name.trim()
@@ -65,6 +73,25 @@ export default function Home() {
       </div>
 
       {error && <p className="error" role="alert">{error}</p>}
+
+      <div className="divider"><span>or join a friend's room</span></div>
+
+      <form className="add-row" onSubmit={handleJoin}>
+        <input
+          className="input code-input"
+          value={code}
+          onChange={(e) => setCode(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6))}
+          placeholder="ROOM CODE"
+          aria-label="Room code"
+          autoCapitalize="characters"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck={false}
+          enterKeyHint="go"
+        />
+        <button className="btn btn-secondary" disabled={code.length < 6 || !isConfigured}>Join</button>
+      </form>
+
       {!isConfigured && (
         <p className="notice">
           Supabase isn't connected yet. Copy <code>.env.example</code> to <code>.env.local</code> and add your keys.

@@ -56,7 +56,11 @@ export default function Lobby({ room, participants, options, me, isHost, refresh
     <div className="screen lobby">
       <header className="room-header">
         <p className="eyebrow">{category.emoji} {category.label}</p>
-        <h1 className="title">Room {room.code}</h1>
+        <div className="code-card">
+          <span className="field-label">Room code</span>
+          <h1 className="room-code">{room.code}</h1>
+          <span className="muted code-hint">Friends enter this on the home screen</span>
+        </div>
         <ShareButton code={room.code} className="btn btn-secondary" />
       </header>
 
@@ -99,7 +103,7 @@ export default function Lobby({ room, participants, options, me, isHost, refresh
         {error && <p className="error" role="alert">{error}</p>}
 
         {options.length === 0 ? (
-          <p className="muted empty">Nothing yet. Everyone can add {category.noun}s.</p>
+          <p className="muted empty">Nothing yet. Anyone in the room can add a {category.noun}.</p>
         ) : (
           <ul className="options">
             {options.map((o) => (
