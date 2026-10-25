@@ -3,8 +3,8 @@ import { supabase, ensureSession } from './supabase'
 const NAME_KEY = 'settled:name'
 
 export const CATEGORIES = {
-  eat: { label: 'Where to eat', emoji: '🍜', noun: 'restaurant', placeholder: 'Add a restaurant' },
-  watch: { label: 'What to watch', emoji: '🍿', noun: 'movie or show', placeholder: 'Add a movie or show' },
+  eat: { label: 'Where to eat', sub: 'Restaurants, takeout, cafés', noun: 'restaurant', placeholder: 'Add a restaurant' },
+  watch: { label: 'What to watch', sub: 'Movies and shows', noun: 'movie or show', placeholder: 'Add a movie or show' },
 }
 
 export function getSavedName() {

@@ -69,18 +69,18 @@ export default function SwipeCard({ label, nextLabel, onVote }) {
           onPointerUp={handleUp}
           onPointerCancel={handleUp}
         >
-          <span className="stamp stamp-yes" style={{ opacity: Math.max(0, lean) }}>YES</span>
-          <span className="stamp stamp-no" style={{ opacity: Math.max(0, -lean) }}>NOPE</span>
+          <span className="stamp stamp-yes" style={{ opacity: Math.max(0, lean) }}>Yes</span>
+          <span className="stamp stamp-no" style={{ opacity: Math.max(0, -lean) }}>Nope</span>
           <span className="card-label">{label}</span>
         </div>
       </div>
 
       <div className="vote-buttons">
         <button type="button" className="vote-btn vote-no" onClick={() => fling(-1)} aria-label={`No to ${label}`}>
-          ✕
+          No
         </button>
         <button type="button" className="vote-btn vote-yes" onClick={() => fling(1)} aria-label={`Yes to ${label}`}>
-          ✓
+          Yes
         </button>
       </div>
     </div>

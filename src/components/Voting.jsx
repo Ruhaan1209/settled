@@ -72,8 +72,8 @@ export default function Voting({ room, participants, options, votes, me, isHost,
     return (
       <div className="screen voting">
         <header className="room-header">
-          <p className="eyebrow">{category.emoji} {category.label}</p>
-          <h1 className="title">You're done!</h1>
+          <p className="eyebrow">{category.label}</p>
+          <h1 className="title">You're done.</h1>
           <p className="muted">
             Waiting for everyone else · {doneCount} of {participants.length} finished
           </p>
@@ -85,7 +85,7 @@ export default function Voting({ room, participants, options, votes, me, isHost,
             return (
               <li key={p.id} className={`done-row${done ? ' is-done' : ''}`}>
                 <span>{p.name}{p.id === me?.id && ' (you)'}</span>
-                <span className="done-mark">{done ? '✓' : 'voting…'}</span>
+                <span className="done-mark">{done ? 'Done' : 'Still voting'}</span>
               </li>
             )
           })}
@@ -120,7 +120,7 @@ export default function Voting({ room, participants, options, votes, me, isHost,
   return (
     <div className="screen voting">
       <header className="room-header">
-        <p className="eyebrow">{category.emoji} {category.label}</p>
+        <p className="eyebrow">{category.label}</p>
         <div className="progress-row">
           <span className="muted">{position} of {options.length}</span>
           <div className="progress" aria-hidden="true">

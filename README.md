@@ -9,7 +9,7 @@ One person creates a room and shares the link. Friends join from their phones, a
 - **React + Vite** (JavaScript, functional components and hooks)
 - **Supabase** for the database, realtime updates and anonymous auth
 - **Vercel** for hosting
-- Plain CSS, mobile-first, dark mode by default
+- Plain CSS, mobile-first, with self-hosted Fraunces and Instrument Sans fonts and automatic light/dark mode
 
 ## How it works
 

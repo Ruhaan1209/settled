@@ -36,13 +36,13 @@ export default function Results({ room, participants, options, votes, isHost, re
   return (
     <div className="screen results">
       <header className="room-header">
-        <p className="eyebrow">{category.emoji} {category.label}</p>
-        <h1 className="title">The group has spoken</h1>
+        <p className="eyebrow">{category.label}</p>
+        <h1 className="title">Settled<span className="dot">.</span></h1>
       </header>
 
       {winner ? (
-        <section className="winner-card">
-          <span className="winner-kicker">Winner</span>
+        <section className="winner">
+          <span className="eyebrow">The pick</span>
           <span className="winner-label">{winner.label}</span>
           <span className="winner-votes">
             {winnerYes} of {voterCount} said yes
@@ -50,8 +50,8 @@ export default function Results({ room, participants, options, votes, isHost, re
           {room.tie_broken && (
             <span className="tie-note">
               {winnerYes === 0
-                ? '🎲 Nobody said yes to anything, so we picked at random'
-                : `🎲 ${tieText}, picked at random`}
+                ? 'Nobody said yes to anything, so it was picked at random.'
+                : `${tieText}, picked at random.`}
             </span>
           )}
         </section>

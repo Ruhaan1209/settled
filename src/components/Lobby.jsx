@@ -55,7 +55,7 @@ export default function Lobby({ room, participants, options, me, isHost, refresh
   return (
     <div className="screen lobby">
       <header className="room-header">
-        <p className="eyebrow">{category.emoji} {category.label}</p>
+        <p className="eyebrow">{category.label}</p>
         <div className="code-card">
           <span className="field-label">Room code</span>
           <h1 className="room-code">{room.code}</h1>
@@ -96,8 +96,8 @@ export default function Lobby({ room, participants, options, me, isHost, refresh
             enterKeyHint="send"
             aria-label={category.placeholder}
           />
-          <button className="btn btn-primary add-btn" disabled={!label.trim() || adding} aria-label="Add option">
-            +
+          <button className="btn btn-primary add-btn" disabled={!label.trim() || adding} >
+            Add
           </button>
         </form>
         {error && <p className="error" role="alert">{error}</p>}

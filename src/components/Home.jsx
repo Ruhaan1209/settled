@@ -40,8 +40,8 @@ export default function Home() {
   return (
     <div className="screen home">
       <header className="home-header">
-        <h1 className="logo">Settled</h1>
-        <p className="tagline">End the group chat debate in under 2 minutes.</p>
+        <h1 className="logo">Settled<span className="dot">.</span></h1>
+        <p className="tagline">End the group chat debate in two minutes.</p>
       </header>
 
       <label className="field">
@@ -66,15 +66,18 @@ export default function Home() {
             onClick={() => handleCreate(key)}
             disabled={busy !== null || !isConfigured}
           >
-            <span className="choice-emoji" aria-hidden="true">{cat.emoji}</span>
-            <span className="choice-label">{busy === key ? 'Creating room…' : cat.label}</span>
+            <span className="choice-text">
+              <span className="choice-label">{cat.label}</span>
+              <span className="choice-sub">{busy === key ? 'Creating room…' : cat.sub}</span>
+            </span>
+            <span className="choice-arrow" aria-hidden="true">→</span>
           </button>
         ))}
       </div>
 
       {error && <p className="error" role="alert">{error}</p>}
 
-      <div className="divider"><span>or join a friend's room</span></div>
+      <div className="divider"><span>or join a room</span></div>
 
       <form className="add-row" onSubmit={handleJoin}>
         <input
