@@ -280,8 +280,39 @@ button:disabled {
 .home-header {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-top: 20px;
+  gap: 6px;
+  padding: 28px 0 12px;
+  text-align: center;
+}
+
+.home-header .logo {
+  font-size: 3.5rem;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.home-header .tagline {
+  font-size: 1.3rem;
+  line-height: 1.35;
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.plan-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.plan-sub {
+  font-size: 0.9rem;
 }
 
 .choices {
@@ -740,7 +771,6 @@ button:disabled {
   padding: 16px;
   border-radius: var(--radius);
   background: var(--gray-bg);
-  animation: fade 0.35s ease both;
 }
 
 .winner-icon {
@@ -778,8 +808,16 @@ button:disabled {
   font-size: 0.9rem;
 }
 
-.reveal {
-  animation: fade 0.35s ease 0.15s both;
+.counting {
+  font-size: 0.9rem;
+}
+
+.suspense {
+  animation: suspense 0.7s ease both;
+}
+
+.suspense-slow {
+  animation-duration: 1.3s;
 }
 
 .table {
@@ -867,5 +905,18 @@ button:disabled {
 @media (prefers-color-scheme: dark) {
   .is-done::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%23191919' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes suspense {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+    transform: none;
   }
 }

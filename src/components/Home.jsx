@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div className="screen home">
       <header className="home-header">
-        <h1 className="logo">Settled</h1>
+        <h1 className="logo">Settled.</h1>
         <p className="tagline">End the group chat debate.</p>
       </header>
 
@@ -57,6 +57,11 @@ export default function Home() {
           enterKeyHint="done"
         />
       </label>
+
+      <div className="plan">
+        <h2 className="plan-title">What's the plan?</h2>
+        <p className="muted plan-sub">Pick one, share the room code, and everyone votes.</p>
+      </div>
 
       <div className="choices">
         {Object.entries(CATEGORIES).map(([key, cat]) => (

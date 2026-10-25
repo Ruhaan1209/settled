@@ -7,6 +7,9 @@ const COUNT_MS = 1400
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+// Each part of the result fades in after the one before it
+const stage = (seconds) => ({ animationDelay: `${seconds}s` })
+
 export default function Results({ room, participants, options, votes, isHost, refresh }) {
   const category = CATEGORIES[room.category]
   const [restarting, setRestarting] = useState(false)
@@ -55,21 +58,21 @@ export default function Results({ room, participants, options, votes, isHost, re
 
       {!revealed ? (
         <div className="skeleton" role="status" aria-label="Counting votes">
-          <div className="skeleton-line short" />
+          <span className="muted counting">Counting votes…</span>
           <div className="skeleton-line wide" />
           <div className="skeleton-line short" />
         </div>
       ) : winner ? (
         <section className="winner">
-          <span className="winner-icon" aria-hidden="true">✓</span>
+          <span className="winner-icon suspense" style={stage(0.2)} aria-hidden="true">✓</span>
           <div className="winner-body">
-            <span className="eyebrow">Winner</span>
-            <span className="winner-label">{winner.label}</span>
-            <span className="winner-votes">
+            <span className="eyebrow suspense" style={stage(0)}>And the winner is…</span>
+            <span className="winner-label suspense suspense-slow" style={stage(0.6)}>{winner.label}</span>
+            <span className="winner-votes suspense" style={stage(1.9)}>
               {winnerYes} of {voterCount} said yes
             </span>
             {room.tie_broken && (
-              <span className="tie-note">
+              <span className="tie-note suspense" style={stage(2.3)}>
                 {winnerYes === 0
                   ? 'Nobody said yes to anything, so it was picked at random.'
                   : `${tieText}, picked at random.`}
@@ -82,7 +85,7 @@ export default function Results({ room, participants, options, votes, isHost, re
       )}
 
       {revealed && (
-        <section className="section reveal">
+        <section className="section suspense" style={stage(2.7)}>
           <h2 className="section-title">All votes</h2>
           <table className="table">
             <thead>
@@ -118,7 +121,7 @@ export default function Results({ room, participants, options, votes, isHost, re
       {error && <p className="error" role="alert">{error}</p>}
 
       {revealed && (
-        <footer className="sticky-footer">
+        <footer className="sticky-footer suspense" style={stage(3.1)}>
           {isHost ? (
             <button className="btn btn-primary btn-block" onClick={handlePlayAgain} disabled={restarting}>
               {restarting ? 'Starting…' : 'Play again'}
