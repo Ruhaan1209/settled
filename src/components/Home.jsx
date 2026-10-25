@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isConfigured } from '../lib/supabase'
 import { CATEGORIES, createRoom, getSavedName, saveName } from '../lib/room'
+import Feedback from './Feedback'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -103,6 +104,8 @@ export default function Home() {
       </form>
 
       <p className="closer">Getting rid of “you decide,”<br />one room at a time.</p>
+
+      {isConfigured && <Feedback />}
 
       {!isConfigured && (
         <p className="notice">

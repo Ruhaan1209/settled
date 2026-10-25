@@ -21,7 +21,7 @@ One person creates a room and shares the link. Friends join from their phones, a
 ## Running locally
 
 1. Create a free project at [supabase.com](https://supabase.com).
-2. In **SQL Editor**, run `supabase/schema.sql`.
+2. In **SQL Editor**, run `supabase/schema.sql`, then `supabase/feedback.sql`.
 3. In **Authentication → Sign In / Providers**, enable anonymous sign-ins.
 4. Copy `.env.example` to `.env.local` and fill in the Project URL and anon key from **Project Settings → API**.
 5. Run:
@@ -33,7 +33,7 @@ One person creates a room and shares the link. Friends join from their phones, a
 
 ## Usage stats
 
-`supabase/stats.sql` has queries for total users, daily signups, weekly active users, completion rate, and more.
+`supabase/stats.sql` has queries for total users, daily signups, weekly active users, completion rate, and more, plus one to read feedback sent through the in-app form.
 
 ## Status
 

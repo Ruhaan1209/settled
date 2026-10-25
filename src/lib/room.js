@@ -69,3 +69,12 @@ export function endVoting(roomId) {
 export function playAgain(roomId) {
   return rpc('play_again', { p_room_id: roomId })
 }
+
+export function submitFeedback(message, contact) {
+  return rpc('submit_feedback', {
+    p_message: message,
+    p_contact: contact,
+    p_page: window.location.pathname,
+    p_user_agent: navigator.userAgent,
+  })
+}

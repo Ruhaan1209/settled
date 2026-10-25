@@ -35,3 +35,8 @@ from (
   select user_id from public.participants
   group by user_id having count(distinct date(joined_at)) >= 2
 ) t;
+
+-- Feedback and problem reports, newest first
+select created_at, message, contact, page
+from public.feedback
+order by created_at desc;
