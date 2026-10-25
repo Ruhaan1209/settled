@@ -41,7 +41,7 @@ export default function Home() {
     <div className="screen home">
       <header className="home-header">
         <h1 className="logo">Settled<span className="dot">.</span></h1>
-        <p className="tagline">End the group chat debate in two minutes.</p>
+        <p className="tagline">End the group chat debate.</p>
       </header>
 
       <label className="field">
