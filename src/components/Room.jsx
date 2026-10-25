@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Lobby from './Lobby'
 import Voting from './Voting'
+import Results from './Results'
 import { getSavedName, saveName } from '../lib/room'
 import { useRoom } from '../lib/useRoom'
 
@@ -67,12 +68,5 @@ function RoomView({ code, name }) {
 
   if (room.status === 'lobby') return <Lobby {...roomState} />
   if (room.status === 'voting') return <Voting key={room.round} {...roomState} />
-
-  // Results screen comes next.
-  return (
-    <div className="screen center">
-      <h1 className="title">Results are in</h1>
-      <p className="muted">This screen is coming soon.</p>
-    </div>
-  )
+  return <Results {...roomState} />
 }

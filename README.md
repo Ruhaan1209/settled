@@ -40,4 +40,5 @@ One person creates a room and shares the link. Friends join from their phones, a
 - [x] Home screen and room creation
 - [x] Live lobby
 - [x] Voting
-- [ ] Results and play again
+- [x] Results and play again
+- [x] Join by room code
