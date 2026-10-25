@@ -48,7 +48,7 @@ export function useRoom(code, name) {
 
     const room = roomRes.data
     let votes = []
-    if (room.status === 'results') {
+    if (room.status !== 'lobby') {
       const votesRes = await supabase.from('votes').select('*').eq('room_id', roomId).eq('round', room.round)
       if (seq !== loadSeq.current) return
       votes = votesRes.data || []

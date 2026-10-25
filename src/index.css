@@ -489,3 +489,173 @@ code {
 .code-hint {
   font-size: 0.85rem;
 }
+
+/* Voting */
+
+.voting {
+  min-height: calc(100dvh - 48px);
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.progress {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+
+.swipe {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card-stack {
+  position: relative;
+  height: min(52dvh, 400px);
+}
+
+.card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  border-radius: 24px;
+  background: linear-gradient(160deg, var(--surface-2), var(--surface));
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.25);
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+  animation: pop-in 0.2s ease;
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.card-behind {
+  transform: translateY(26px) scale(0.92);
+  opacity: 0.55;
+  box-shadow: none;
+  animation: none;
+  pointer-events: none;
+}
+
+.card-label {
+  font-size: clamp(1.6rem, 7vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.stamp {
+  position: absolute;
+  top: 22px;
+  padding: 4px 12px;
+  border: 3px solid;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+
+.stamp-yes {
+  left: 22px;
+  color: var(--yes);
+  transform: rotate(-12deg);
+}
+
+.stamp-no {
+  right: 22px;
+  color: var(--no);
+  transform: rotate(12deg);
+}
+
+.vote-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.vote-btn {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  border: 2px solid;
+  background: var(--surface);
+  font-size: 1.9rem;
+  font-weight: 700;
+  transition: transform 0.1s ease;
+}
+
+.vote-btn:active {
+  transform: scale(0.92);
+}
+
+.vote-no {
+  border-color: var(--no);
+  color: var(--no);
+}
+
+.vote-yes {
+  border-color: var(--yes);
+  color: var(--yes);
+}
+
+.center-text {
+  text-align: center;
+}
+
+.done-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.done-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+  padding: 0 16px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.done-mark {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.is-done .done-mark {
+  color: var(--yes);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
