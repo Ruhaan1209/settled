@@ -403,8 +403,12 @@ end;
 $$;
 
 -- ---------------------------------------------------------------------------
--- Permissions: only signed-in (incl. anonymous) users may call actions
+-- Permissions: only signed-in (incl. anonymous) users may read or call actions
 -- ---------------------------------------------------------------------------
+
+-- Explicit so this works even with "Automatically expose new tables" turned off
+revoke all on public.rooms, public.participants, public.options, public.votes from anon, authenticated;
+grant select on public.rooms, public.participants, public.options, public.votes to authenticated;
 
 revoke execute on all functions in schema public from public, anon;
 
