@@ -84,8 +84,8 @@ export default function Voting({ room, participants, options, votes, me, isHost,
             const done = p.done_round >= room.round
             return (
               <li key={p.id} className={`done-row${done ? ' is-done' : ''}`}>
-                <span>{p.name}{p.id === me?.id && ' (you)'}</span>
-                <span className="done-mark">{done ? 'Done' : 'Still voting'}</span>
+                <span className="done-name">{p.name}{p.id === me?.id && ' (you)'}</span>
+                {!done && <span className="done-mark">Voting…</span>}
               </li>
             )
           })}

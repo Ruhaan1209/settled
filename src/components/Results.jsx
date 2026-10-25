@@ -1,11 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CATEGORIES, playAgain } from '../lib/room'
+
+const COUNT_MS = 1400
+
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export default function Results({ room, participants, options, votes, isHost, refresh }) {
   const category = CATEGORIES[room.category]
   const [restarting, setRestarting] = useState(false)
   const [error, setError] = useState('')
+  // Brief "counting votes" pause before the winner appears
+  const [revealed, setRevealed] = useState(prefersReducedMotion)
+
+  useEffect(() => {
+    if (revealed) return
+    const t = setTimeout(() => setRevealed(true), COUNT_MS)
+    return () => clearTimeout(t)
+  }, [revealed])
 
   const yesCount = {}
   for (const o of options) yesCount[o.id] = 0
@@ -37,60 +50,85 @@ export default function Results({ room, participants, options, votes, isHost, re
     <div className="screen results">
       <header className="room-header">
         <p className="eyebrow">{category.label}</p>
-        <h1 className="title">Settled<span className="dot">.</span></h1>
+        <h1 className="title">Results</h1>
       </header>
 
-      {winner ? (
+      {!revealed ? (
+        <div className="skeleton" role="status" aria-label="Counting votes">
+          <div className="skeleton-line short" />
+          <div className="skeleton-line wide" />
+          <div className="skeleton-line short" />
+        </div>
+      ) : winner ? (
         <section className="winner">
-          <span className="eyebrow">The pick</span>
-          <span className="winner-label">{winner.label}</span>
-          <span className="winner-votes">
-            {winnerYes} of {voterCount} said yes
-          </span>
-          {room.tie_broken && (
-            <span className="tie-note">
-              {winnerYes === 0
-                ? 'Nobody said yes to anything, so it was picked at random.'
-                : `${tieText}, picked at random.`}
+          <span className="winner-icon" aria-hidden="true">✓</span>
+          <div className="winner-body">
+            <span className="eyebrow">Winner</span>
+            <span className="winner-label">{winner.label}</span>
+            <span className="winner-votes">
+              {winnerYes} of {voterCount} said yes
             </span>
-          )}
+            {room.tie_broken && (
+              <span className="tie-note">
+                {winnerYes === 0
+                  ? 'Nobody said yes to anything, so it was picked at random.'
+                  : `${tieText}, picked at random.`}
+              </span>
+            )}
+          </div>
         </section>
       ) : (
         <p className="muted">No winner this round.</p>
       )}
 
-      <section className="section">
-        <h2 className="section-title">All votes</h2>
-        <ul className="tally">
-          {tally.map((o) => (
-            <li key={o.id} className={`tally-row${o.id === winner?.id ? ' is-winner' : ''}`}>
-              <div className="tally-top">
-                <span className="tally-label">{o.label}</span>
-                <span className="tally-count">{yesCount[o.id]} yes</span>
-              </div>
-              <div className="progress" aria-hidden="true">
-                <div
-                  className="progress-fill"
-                  style={{ width: `${voterCount ? (yesCount[o.id] / voterCount) * 100 : 0}%` }}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
+      {revealed && (
+        <section className="section reveal">
+          <h2 className="section-title">All votes</h2>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th className="bar-cell" aria-hidden="true" />
+                <th className="num">Yes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tally.map((o) => (
+                <tr key={o.id} className={o.id === winner?.id ? 'is-winner' : undefined}>
+                  <td>
+                    {o.label}
+                    {o.id === winner?.id && <span className="select-tag">Winner</span>}
+                  </td>
+                  <td className="bar-cell" aria-hidden="true">
+                    <div className="progress">
+                      <div
+                        className="progress-fill"
+                        style={{ width: `${voterCount ? (yesCount[o.id] / voterCount) * 100 : 0}%` }}
+                      />
+                    </div>
+                  </td>
+                  <td className="num">{yesCount[o.id]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      )}
 
       {error && <p className="error" role="alert">{error}</p>}
 
-      <footer className="sticky-footer">
-        {isHost ? (
-          <button className="btn btn-primary btn-block" onClick={handlePlayAgain} disabled={restarting}>
-            {restarting ? 'Starting…' : 'Play again'}
-          </button>
-        ) : (
-          <p className="muted hint">{host?.name || 'The host'} can start another round</p>
-        )}
-        <Link className="btn btn-secondary btn-block" to="/">New room</Link>
-      </footer>
+      {revealed && (
+        <footer className="sticky-footer">
+          {isHost ? (
+            <button className="btn btn-primary btn-block" onClick={handlePlayAgain} disabled={restarting}>
+              {restarting ? 'Starting…' : 'Play again'}
+            </button>
+          ) : (
+            <p className="muted hint">{host?.name || 'The host'} can start another round</p>
+          )}
+          <Link className="btn btn-secondary btn-block" to="/">New room</Link>
+        </footer>
+      )}
     </div>
   )
 }

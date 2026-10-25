@@ -70,10 +70,10 @@ export default function Lobby({ room, participants, options, me, isHost, refresh
         </h2>
         <ul className="people">
           {participants.map((p) => (
-            <li key={p.id} className={`person${p.id === me?.id ? ' person-me' : ''}`}>
+            <li key={p.id} className="person" data-initial={p.name.charAt(0).toUpperCase()}>
               {p.name}
-              {p.user_id === room.host_id && <span className="tag">host</span>}
-              {p.id === me?.id && <span className="tag">you</span>}
+              {p.user_id === room.host_id && <span className="tag tag-host">Host</span>}
+              {p.id === me?.id && <span className="tag tag-you">You</span>}
             </li>
           ))}
         </ul>
