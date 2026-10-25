@@ -1,0 +1,254 @@
+:root {
+  --bg: #0f0f14;
+  --surface: #1a1a22;
+  --surface-2: #24242e;
+  --border: #2e2e3a;
+  --text: #f4f4f7;
+  --muted: #9a9aab;
+  --accent: #7c5cff;
+  --accent-text: #ffffff;
+  --eat: #ff7a45;
+  --watch: #3fb6ff;
+  --yes: #2ecc71;
+  --no: #ff4d6d;
+  --error: #ff6b81;
+  --radius: 18px;
+  --tap: 56px;
+
+  color-scheme: dark;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f6f6fa;
+    --surface: #ffffff;
+    --surface-2: #ececf3;
+    --border: #dcdce6;
+    --text: #16161d;
+    --muted: #6b6b7b;
+    --error: #d62f4b;
+    color-scheme: light;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+code {
+  font-size: 0.9em;
+  padding: 1px 5px;
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+
+/* Layout */
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  padding: max(24px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.screen.center {
+  min-height: calc(100dvh - 48px);
+  justify-content: center;
+  text-align: center;
+}
+
+/* Type */
+
+.logo {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+}
+
+.tagline,
+.muted {
+  margin: 0;
+  color: var(--muted);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.error {
+  margin: 0;
+  color: var(--error);
+  font-weight: 500;
+}
+
+.notice {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Form */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.field-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.input {
+  height: var(--tap);
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 1.05rem;
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--accent);
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  padding: 0 24px;
+  border-radius: 14px;
+  border: none;
+  font-size: 1.05rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition: transform 0.1s ease;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.btn-secondary {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+/* Home */
+
+.home {
+  padding-top: 24px;
+}
+
+.home-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 150px;
+  padding: 22px;
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  text-align: left;
+  transition: transform 0.1s ease;
+}
+
+.choice:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.choice-eat {
+  background: linear-gradient(135deg, var(--eat), #e8437a);
+}
+
+.choice-watch {
+  background: linear-gradient(135deg, var(--watch), var(--accent));
+}
+
+.choice-emoji {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.choice-label {
+  font-size: 1.5rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
