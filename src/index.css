@@ -315,6 +315,16 @@ button:disabled {
   font-size: 0.9rem;
 }
 
+.closer {
+  margin: auto 0 0;
+  padding: 32px 0 8px;
+  color: var(--faint);
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
 .choices {
   display: grid;
   grid-template-columns: 1fr 1fr;

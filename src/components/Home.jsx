@@ -102,6 +102,8 @@ export default function Home() {
         <button className="btn btn-secondary" disabled={code.length < 6 || !isConfigured}>Join</button>
       </form>
 
+      <p className="closer">No more “no, you decide.”</p>
+
       {!isConfigured && (
         <p className="notice">
           Supabase isn't connected yet. Copy <code>.env.example</code> to <code>.env.local</code> and add your keys.
