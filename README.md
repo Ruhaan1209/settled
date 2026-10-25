@@ -2,7 +2,9 @@
 
 End the "where should we eat / what should we watch" group chat debate.
 
-One person creates a room and shares the link. Friends join from their phones, add options, and vote yes or no on each one. The app picks the winner, breaking ties at random. No signup required.
+**Try it live: [settled-hazel.vercel.app](https://settled-hazel.vercel.app)**
+
+One person creates a room and shares the code or link. Friends join from their phones, add options, and vote yes or no on each one. The app picks the winner, breaking ties at random. No signup required.
 
 ## Tech
 
