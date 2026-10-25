@@ -19,6 +19,8 @@
   --red-text: #d44c47;
 
   --shadow-card: rgba(15, 15, 15, 0.04) 0 0 0 1px, rgba(15, 15, 15, 0.03) 0 3px 6px, rgba(15, 15, 15, 0.06) 0 9px 24px;
+  --shadow-raised: rgba(15, 15, 15, 0.06) 0 0 0 1px, rgba(15, 15, 15, 0.08) 0 4px 10px, rgba(15, 15, 15, 0.12) 0 14px 32px;
+  --shadow-text: 0 4px 14px rgba(15, 15, 15, 0.16);
   --radius: 6px;
   --tap: 48px;
 
@@ -53,6 +55,8 @@
     --red-text: #e65b58;
 
     --shadow-card: rgba(15, 15, 15, 0.1) 0 0 0 1px, rgba(15, 15, 15, 0.2) 0 3px 6px, rgba(15, 15, 15, 0.4) 0 9px 24px;
+    --shadow-raised: rgba(0, 0, 0, 0.3) 0 0 0 1px, rgba(0, 0, 0, 0.35) 0 4px 10px, rgba(0, 0, 0, 0.55) 0 14px 32px;
+    --shadow-text: 0 4px 16px rgba(0, 0, 0, 0.7);
     color-scheme: dark;
   }
 }
@@ -287,6 +291,7 @@ button:disabled {
 
 .home-header .logo {
   font-size: 3.5rem;
+  text-shadow: var(--shadow-text);
   letter-spacing: -0.035em;
   line-height: 1.05;
 }
@@ -342,7 +347,7 @@ button:disabled {
   border: none;
   border-radius: 8px;
   background: var(--bg);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-raised);
   text-align: left;
   transition: background-color 0.12s ease;
 }
@@ -913,6 +918,10 @@ button:disabled {
 }
 
 @media (prefers-color-scheme: dark) {
+  .choice {
+    background: var(--sidebar);
+  }
+
   .is-done::before {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%23191919' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
