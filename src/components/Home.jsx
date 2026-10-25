@@ -102,7 +102,7 @@ export default function Home() {
         <button className="btn btn-secondary" disabled={code.length < 6 || !isConfigured}>Join</button>
       </form>
 
-      <p className="closer">No more “no, you decide.”</p>
+      <p className="closer">Getting rid of “you decide,”<br />one room at a time.</p>
 
       {!isConfigured && (
         <p className="notice">
