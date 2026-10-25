@@ -1,34 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { supabase } from '../lib/supabase'
-import { CATEGORIES, getSavedName, joinRoom, roomUrl, saveName } from '../lib/room'
+import Lobby from './Lobby'
+import { getSavedName, saveName } from '../lib/room'
+import { useRoom } from '../lib/useRoom'
 
 export default function Room() {
   const { code: rawCode } = useParams()
   const code = rawCode.toUpperCase()
   const [name, setName] = useState(getSavedName)
   const [joinedName, setJoinedName] = useState(() => getSavedName() || null)
-  const [room, setRoom] = useState(null)
-  const [error, setError] = useState('')
-
-  useEffect(() => {
-    if (!joinedName) return
-    let cancelled = false
-    setError('')
-    ;(async () => {
-      try {
-        const roomId = await joinRoom(code, joinedName)
-        const { data, error: fetchError } = await supabase.from('rooms').select('*').eq('id', roomId).single()
-        if (fetchError) throw fetchError
-        if (!cancelled) setRoom(data)
-      } catch (err) {
-        if (!cancelled) setError(err.message)
-      }
-    })()
-    return () => {
-      cancelled = true
-    }
-  }, [code, joinedName])
 
   function handleJoin(e) {
     e.preventDefault()
@@ -36,15 +16,6 @@ export default function Room() {
     if (!trimmed) return
     saveName(trimmed)
     setJoinedName(trimmed)
-  }
-
-  if (error) {
-    return (
-      <div className="screen center">
-        <p className="error" role="alert">{error}</p>
-        <Link className="btn btn-secondary" to="/">Back home</Link>
-      </div>
-    )
   }
 
   if (!joinedName) {
@@ -69,6 +40,22 @@ export default function Room() {
     )
   }
 
+  return <RoomView code={code} name={joinedName} />
+}
+
+function RoomView({ code, name }) {
+  const roomState = useRoom(code, name)
+  const { room, error } = roomState
+
+  if (error) {
+    return (
+      <div className="screen center">
+        <p className="error" role="alert">{error}</p>
+        <Link className="btn btn-secondary" to="/">Back home</Link>
+      </div>
+    )
+  }
+
   if (!room) {
     return (
       <div className="screen center">
@@ -77,42 +64,13 @@ export default function Room() {
     )
   }
 
-  // Lobby, voting and results screens replace this next.
-  const category = CATEGORIES[room.category]
+  if (room.status === 'lobby') return <Lobby {...roomState} />
+
+  // Voting and results screens come next.
   return (
     <div className="screen center">
-      <p className="eyebrow">{category.emoji} {category.label}</p>
-      <h1 className="title">Room {room.code}</h1>
-      <ShareButton code={room.code} />
+      <h1 className="title">{room.status === 'voting' ? 'Voting has started' : 'Results are in'}</h1>
+      <p className="muted">This screen is coming soon.</p>
     </div>
-  )
-}
-
-function ShareButton({ code }) {
-  const [copied, setCopied] = useState(false)
-  const url = roomUrl(code)
-
-  async function handleShare() {
-    if (navigator.share) {
-      try {
-        await navigator.share({ title: 'Settled', text: 'Help us decide! Join my room:', url })
-        return
-      } catch (err) {
-        if (err.name === 'AbortError') return
-      }
-    }
-    try {
-      await navigator.clipboard.writeText(url)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch {
-      window.prompt('Copy this link:', url)
-    }
-  }
-
-  return (
-    <button className="btn btn-primary" onClick={handleShare}>
-      {copied ? 'Link copied!' : 'Share invite link'}
-    </button>
   )
 }

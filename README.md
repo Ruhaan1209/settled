@@ -38,6 +38,6 @@ One person creates a room and shares the link. Friends join from their phones, a
 ## Status
 
 - [x] Home screen and room creation
-- [ ] Live lobby
+- [x] Live lobby
 - [ ] Voting
 - [ ] Results and play again
